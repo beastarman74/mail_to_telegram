@@ -1,16 +1,21 @@
+services:
   mail_to_telegram:
     build: .
-    image: mail_to_telegram:091024
-    container_name: mail_to_telegram_infra
+    image: mail_to_telegram:101024
+    container_name: mail_to_telegram
     restart: unless-stopped
+    # To place container on hosts network instead of being isolated use network_mode: host and comment out ports. This will require any desired port number change to be done using theisten_port value in the config.yaml file.
+#    network_mode: "host"
     ports:
-     # Set left hand port to desired port
-     - 1026:1025
+     # change the left hand port to change the port emails will need to be sent to
+     - 8888:1025
     volumes:
+     # mount the config.py file into the container to pass the Telegram IDs to the application.
      - ./config.py:/opt/mail_to_telegram/config.py
     environment:
      - PUID=1000
      - PGID=1000
+     # Set to the correct local timezone
      - TZ=Europe/London
     stdin_open: true # docker run -i
-    tty: true # docker run -t 
+    tty: true # docker run -t
