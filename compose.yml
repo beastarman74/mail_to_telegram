@@ -1,0 +1,16 @@
+  mail_to_telegram:
+    build: .
+    image: mail_to_telegram:091024
+    container_name: mail_to_telegram_infra
+    restart: unless-stopped
+    ports:
+     # Set left hand port to desired port
+     - 1026:1025
+    volumes:
+     - ./config.py:/opt/mail_to_telegram/config.py
+    environment:
+     - PUID=1000
+     - PGID=1000
+     - TZ=Europe/London
+    stdin_open: true # docker run -i
+    tty: true # docker run -t 
