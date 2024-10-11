@@ -1,7 +1,7 @@
 # mail_to_telegram
 resend smtp messages to telegram including images. 
 
-It opens an SMTP listener on 1025 port and 0.0.0.0 address and will resend all emails to telegram via the configured bot.
+It opens an SMTP listener on port 1025 and 0.0.0.0 address. It will resend all emails to telegram via the configured bot to the desired chat_id, group or channel.
 
 The smtp listener port can be changed either by using the docker ports functionality to map a custom port to the default port 1025 or change the value in the config.py file itself and use network_mode: host in the docker compose file.
 
@@ -11,10 +11,11 @@ Example compose.yml file:
 services:
   mail_to_telegram:
     build: .
-    image: mail_to_telegram:101024
+    image: beastarman/mail_to_telegram:latest
     container_name: mail_to_telegram
     restart: unless-stopped
-    # To place container on hosts network instead of being isolated use network_mode: host and comment out ports. This will require any desired port number change to be done using theisten_port value in the config.yaml file.
+    # To place the container on hosts network instead of being isolated use network_mode: host and comment out ports.
+    # This will require any desired port number change to be done using theisten_port value in the config.yaml file.
 #    network_mode: "host"
     ports:
      # change the left hand port to change the port emails will need to be sent to
@@ -33,7 +34,7 @@ services:
 ```
 
 !IMPORTANT!
-rename "EXAMLE.config.py" to "config.py" and write your chat_id and bot_token variables
+rename "EXAMLE.config.py" to "config.py" and update with the required chat_id and bot_token variables.
 
 ```
 bot_token = '123123123123:SdfSDFsdfSDfWdeyfM-123SDFSDFsdf-O6df'
@@ -42,11 +43,10 @@ listen_addr = "0.0.0.0"
 listen_port = "1025"
 ```
 
-# Sending to multiple Telegram contacts
+## Sending to multiple Telegram contacts
 
-Multiple chat_id's usage is not natively supported with this forwarder. 
+Multiple chat_id's usage is not natively supported with this application. 
 
 The way to achieve this with this application is to setup a Telegram channel to receive the emails and add everyone you wish to receive them to the channel, instead of each contact receiving them directly to their own chat. Add the bot to the channel too to enable it to be able to post messages to the channel.
 
 https://telegram.org/tour/channels/es?ln=a#:~:text=To%20create%20your%20own%20channel,are%20indexed%20by%20search%20engines
-
