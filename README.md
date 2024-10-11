@@ -34,7 +34,11 @@ services:
 ```
 
 !IMPORTANT!
-rename "EXAMLE.config.py" to "config.py" and update with the required chat_id and bot_token variables.
+Either take a copy of of "EXAMPLE.config.py" and rename it to "config.py", update with the required chat_id and bot_token variables.
+
+Or create a new file with the below variables included. Set the bot_token and chat_id variables. 
+
+You can change the listen_port value in config.py too if you are placing the Docker Container on the host network. Or you can use the docker ports method (recommended) to send to a different port but leave the listen_port as is.
 
 ```
 bot_token = '123123123123:SdfSDFsdfSDfWdeyfM-123SDFSDFsdf-O6df'
