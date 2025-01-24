@@ -1,3 +1,5 @@
+forked from [atheisthax/mail_to_telegram ](https://github.com/atheisthax/mail_to_telegram/tree/main).
+
 # mail_to_telegram
 resend smtp messages to telegram including images. 
 
